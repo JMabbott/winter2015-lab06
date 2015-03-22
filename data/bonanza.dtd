@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Bob's Burger Bar order data. COMP4711 Lab 6
+Joel Mabbott
+A00593141
+Set4O
+-->
+
+<!-- An order identifies: customer, order type, burgers, and a special -->
+<!ELEMENT order (customer, delivery?, burger+, special?)>
+
+<!-- A customer is identified by their name -->
+<!ELEMENT customer (#PCDATA)>
+
+<!-- An order can be for eat-in, takeout, or delivery. Customer picks -->
+<!ATTLIST order
+	type	(eatin|takeout|delivery) #REQUIRED
+>
+
+<!-- Delivery orders require instructions -->
+<!ELEMENT delivery (#PCDATA)>
+
+<!-- Special instructions -->
+<!ELEMENT special (#PCDATA)>
+
+<!-- The burgers will be specified individually 
+Burger Customization:
+- 1 of 5 patty types
+- up to two cheeses
+- any number of toppings
+- any number of sauces
+- special instructions
+- an optional name, should the customer wish to propose this as a menu item
+-->
+<!ELEMENT burger (patty, cheeses?, topping*, sauce*, instructions?, name?)>
+
+<!-- A patty can be one of five types (assume beef), and may be named -->
+<!ELEMENT patty (#PCDATA)>
+<!ATTLIST patty
+	type	(beef|pork|turkey|bison|vege) "beef"
+>
+
+<!-- up to two cheeses -->
+<!ELEMENT cheeses EMPTY>
+<!ATTLIST cheeses
+	top	(american|swiss|jack|blue|gruyere|gouda|aged|goat|brie) #IMPLIED
+	bottom	(american|swiss|jack|blue|gruyere|gouda|aged|goat|brie) #IMPLIED
+>
+
+<!-- any number of toppings -->
+<!ELEMENT topping (#PCDATA)>
+<!ATTLIST topping
+	type	(lettuce|tomato|raw|dill|roasted|shrooms|salsa|bacon|chilies|fkchili|avacado|egg|porkbelly) #REQUIRED
+>
+
+<!-- any number of sauces -->
+<!ELEMENT sauce EMPTY>
+<!ATTLIST sauce
+	type	(ketchup|mustard|mayo|fksauce) #REQUIRED
+>
+
+<!-- special instructions -->
+<!ELEMENT instructions (#PCDATA)>
+
+<!-- an optional name -->
+<!ELEMENT name (#PCDATA)>
